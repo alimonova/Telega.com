@@ -3,6 +3,8 @@ package com.example.telegacom
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.LinearLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -70,10 +72,7 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             R.id.framelayout_main, ContactsFragment(),
             "Контакты"
         ).commit()
-
     }
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
@@ -127,6 +126,20 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 "Контакты"
             ).commit()
             return true
+        } else if (id == R.id.about) {
+            backStackRemove()
+            supportFragmentManager.beginTransaction().replace(
+                R.id.framelayout_main, AboutFragment(),
+                "О приложении"
+            ).commit()
+            return true
+        }  else if (id == R.id.rules) {
+            backStackRemove()
+            supportFragmentManager.beginTransaction().replace(
+                R.id.framelayout_main, RulesFragment(),
+                "Правила использования"
+            ).commit()
+            return true
         } else if (id == R.id.login) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -136,6 +149,7 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
+
 
     fun backStackRemove() {
         for (i in 0 until supportFragmentManager.backStackEntryCount) {

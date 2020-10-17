@@ -26,6 +26,14 @@
             android:id="@+id/login"
             android:icon="@drawable/ic_login"
             android:title="Выход" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="О приложении" />
+        <item
+            android:id="@+id/rules"
+            android:icon="@drawable/ic_baseline_help_24"
+            android:title="Правила использования" />
     </group>
 
 </menu>

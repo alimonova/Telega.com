@@ -103,6 +103,8 @@ class ContactsFragment : Fragment() {
             }
         )
 
+
+
         copy_email.setOnClickListener(
             object : View.OnClickListener {
                 override fun onClick(v: View) {

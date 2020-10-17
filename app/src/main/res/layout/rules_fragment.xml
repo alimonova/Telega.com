@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Правила использования"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            android:gravity="center_horizontal"
+            />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/telegacom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="
+   \nВ приложении Telega.com строго запрещено:\n\n
+- Публиковать телеграм-каналы содержащие материалы , нарушающие законодательство Украины и РФ, в частности содержащие призывы к межнациональной розни, излишки обнаженки, обилие нецензурной лексики;
+\n\n- Выдавать себя за администратора чужого телеграм-канала;
+\n\n- Удалять рекламную публикацию раньше указанного в договоренности времени;
+\n\n- Любые другие мошеннические действия."
+            android:textSize="17sp" />
+    </LinearLayout>
+</ScrollView>
