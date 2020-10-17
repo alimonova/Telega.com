@@ -69,8 +69,8 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         navigationView.getMenu().getItem(4).setChecked(true);
         backStackRemove()
         supportFragmentManager.beginTransaction().replace(
-            R.id.framelayout_main, ContactsFragment(),
-            "Контакты"
+            R.id.framelayout_main, AboutFragment(),
+            "О приложении"
         ).commit()
     }
 
