@@ -1,6 +1,5 @@
-package com.example.telegacom
+package com.example.telegacom.Activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -14,7 +13,16 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.telegacom.Activity.LoginActivity
 import com.example.telegacom.Fragment.*
+import com.example.telegacom.R
+import com.example.telegacom.TelegaTimer
 import com.google.android.material.navigation.NavigationView
+import timber.log.Timber
+
+/** onSaveInstanceState Bundle Keys **/
+const val KEY_REVENUE = "revenue_key"
+const val KEY_DESSERT_SOLD = "dessert_sold_key"
+const val KEY_TIMER_SECONDS = "timer_seconds_key"
+const val KEY_TIMER_FOCUS_SECONDS = "timer_seconds_in_focus_key"
 
 public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,26 +30,37 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     lateinit var drawer: DrawerLayout
     lateinit var linearLayout: LinearLayout
     lateinit var navigationView: NavigationView
-    @SuppressLint("ResourceType")
+    private lateinit var telegaTimer: TelegaTimer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.i("onCreate called")
         setContentView(R.layout.activity_main)
 
-        val arguments : Bundle = getIntent().extras as Bundle
+        val arguments : Bundle? = getIntent().extras as Bundle
+        // Setup dessertTimer, passing in the lifecycle
+        telegaTimer = TelegaTimer(this.lifecycle)
 
-        if (!arguments.isEmpty) {
-            val dialog = CustomDialogFragment()
-            val args = Bundle()
-            if (arguments != null) {
-                args.putString(
-                    "message",
-                    "Вы вошли со следующими данными:\nEmail: " + arguments.get("email")
-                        .toString() + "\nПароль: " + arguments.get("password").toString()
-                )
+        if (savedInstanceState != null) {
+            telegaTimer.secondsCount = savedInstanceState.getInt(KEY_TIMER_SECONDS, 0)
+            telegaTimer.secondsCountInFocus = savedInstanceState.getInt(KEY_TIMER_FOCUS_SECONDS, 0)
+        }
+
+        if (arguments != null) {
+            if (!arguments.isEmpty) {
+                val dialog = CustomDialogFragment()
+                val args = Bundle()
+                if (arguments != null) {
+                    args.putString(
+                        "message",
+                        "Вы вошли со следующими данными:\nEmail: " + arguments.get("email")
+                            .toString() + "\nПароль: " + arguments.get("password").toString()
+                    )
+                }
+                args.putString("title", "Авторизация")
+                dialog.arguments = args
+                dialog.show(supportFragmentManager, "custom")
             }
-            args.putString("title", "Авторизация")
-            dialog.arguments = args
-            dialog.show(supportFragmentManager, "custom")
         }
         toolbar = findViewById<Toolbar>(R.id.toolbar_main)
         this.toolbar.title = "Telega.com"
@@ -72,6 +91,13 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             R.id.framelayout_main, AboutFragment(),
             "О приложении"
         ).commit()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_TIMER_SECONDS, telegaTimer.secondsCount)
+        outState.putInt(KEY_TIMER_FOCUS_SECONDS, telegaTimer.secondsCountInFocus)
+        Timber.i("onSaveInstanceState Called")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -157,5 +183,33 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         }
     }
 
+    override fun onStart() {
+        super.onStart();
+        Timber.i("onStart called")
+    }
 
+    override fun onPause() {
+        super.onPause();
+        Timber.i("onPause called")
+    }
+
+    override fun onResume() {
+        super.onResume();
+        Timber.i("onResume called")
+    }
+
+    override fun onStop() {
+        super.onStop();
+        Timber.i("onStop called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy();
+        Timber.i("onDestroy called")
+    }
+
+    override fun onRestart() {
+        super.onRestart();
+        Timber.i("onDestroy called")
+    }
 }
