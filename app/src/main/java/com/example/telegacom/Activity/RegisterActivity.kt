@@ -7,8 +7,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.telegacom.Fragment.CustomDialogFragment
-import com.example.telegacom.Activity.MainActivity
 import com.example.telegacom.R
 
 

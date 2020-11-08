@@ -1,52 +1,51 @@
 package com.example.telegacom.Activity
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.util.Log
 import android.view.MenuItem
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.telegacom.Activity.LoginActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.telegacom.Fragment.*
+import com.example.telegacom.MainViewModel
 import com.example.telegacom.R
-import com.example.telegacom.TelegaTimer
+import com.example.telegacom.ViewModelFactory.MainViewModelFactory
 import com.google.android.material.navigation.NavigationView
 import timber.log.Timber
 
-/** onSaveInstanceState Bundle Keys **/
-const val KEY_REVENUE = "revenue_key"
-const val KEY_DESSERT_SOLD = "dessert_sold_key"
-const val KEY_TIMER_SECONDS = "timer_seconds_key"
-const val KEY_TIMER_FOCUS_SECONDS = "timer_seconds_in_focus_key"
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private val CORRECT_BUZZ_PATTERN = longArrayOf(100, 100, 100, 100, 100, 100)
 
     lateinit var toolbar: Toolbar
     lateinit var drawer: DrawerLayout
     lateinit var linearLayout: LinearLayout
     lateinit var navigationView: NavigationView
-    private lateinit var telegaTimer: TelegaTimer
+    lateinit var viewModel : MainViewModel
+    var testValue : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("onCreate called")
+        testValue = 100;
+        var viewModelFactory = MainViewModelFactory(testValue);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java);
+        viewModel.startTimer();
+        viewModel.startTotalTimer();
         setContentView(R.layout.activity_main)
-
+        Timber.i("onCreate called")
         val arguments : Bundle? = getIntent().extras as Bundle
-        // Setup dessertTimer, passing in the lifecycle
-        telegaTimer = TelegaTimer(this.lifecycle)
-
-        if (savedInstanceState != null) {
-            telegaTimer.secondsCount = savedInstanceState.getInt(KEY_TIMER_SECONDS, 0)
-            telegaTimer.secondsCountInFocus = savedInstanceState.getInt(KEY_TIMER_FOCUS_SECONDS, 0)
-        }
-
-        if (arguments != null) {
+        /*if (arguments != null) {
             if (!arguments.isEmpty) {
                 val dialog = CustomDialogFragment()
                 val args = Bundle()
@@ -61,7 +60,7 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 dialog.arguments = args
                 dialog.show(supportFragmentManager, "custom")
             }
-        }
+        }*/
         toolbar = findViewById<Toolbar>(R.id.toolbar_main)
         this.toolbar.title = "Telega.com"
         setSupportActionBar(toolbar)
@@ -69,6 +68,13 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         toolbar = findViewById<Toolbar>(R.id.toolbar_main)
         toolbar.setTitle(resources.getString(R.string.app_name))
         setSupportActionBar(toolbar)
+
+        viewModel.forAMinuteOnFragment.observe(this, Observer { isForAMinute ->
+            if (isForAMinute == true) {
+                forAMinuteOnFragment();
+                viewModel.forAMinuteOnFragment();
+            }
+        })
 
         linearLayout = findViewById<LinearLayout>(R.id.linearLayout_main)
 
@@ -88,16 +94,18 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         navigationView.getMenu().getItem(4).setChecked(true);
         backStackRemove()
         supportFragmentManager.beginTransaction().replace(
-            R.id.framelayout_main, AboutFragment(),
-            "О приложении"
+            R.id.framelayout_main, ContactsFragment(),
+            "Контакты"
         ).commit()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt(KEY_TIMER_SECONDS, telegaTimer.secondsCount)
-        outState.putInt(KEY_TIMER_FOCUS_SECONDS, telegaTimer.secondsCountInFocus)
-        Timber.i("onSaveInstanceState Called")
+    private fun forAMinuteOnFragment() {
+        Toast.makeText(
+            this,
+            "Вы находились на этой странице в течение еще одной минуты.",
+            Toast.LENGTH_SHORT
+        ).show()
+        buzz(CORRECT_BUZZ_PATTERN)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -109,6 +117,8 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        viewModel.UpdateSeconds();
+        Log.i("test", "Navigation Item selected");
         // Handle navigation view item clicks here.
         //Checking if the item is in checked state or not, if not make it in checked state
         if (item.isChecked) item.setChecked(false) else item.setChecked(true)
@@ -185,6 +195,7 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
     override fun onStart() {
         super.onStart();
+        viewModel.focusStartTimer();
         Timber.i("onStart called")
     }
 
@@ -200,10 +211,13 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
     override fun onStop() {
         super.onStop();
+        viewModel.focusStopTimer();
         Timber.i("onStop called")
     }
 
     override fun onDestroy() {
+        viewModel.stopTotalTimer();
+        viewModel.stopTimer();
         super.onDestroy();
         Timber.i("onDestroy called")
     }
@@ -211,5 +225,18 @@ public class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     override fun onRestart() {
         super.onRestart();
         Timber.i("onDestroy called")
+    }
+
+    private fun buzz(pattern: LongArray) {
+        val buzzer = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        buzzer?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                buzzer.vibrate(VibrationEffect.createWaveform(pattern, -1))
+            } else {
+                //deprecated in API 26
+                buzzer.vibrate(pattern, -1)
+            }
+        }
+        Log.i("debug", "VIBRATING")
     }
 }

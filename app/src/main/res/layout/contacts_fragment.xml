@@ -1,130 +1,152 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:rowCount="6"
-    android:columnCount="3"
-    android:layout_margin="15dp">
-
-    <TextView
-        android:text="Наши контакты"
-        android:layout_marginBottom="20dp"
-        android:layout_column="0"
-        android:layout_row="0"
-        android:layout_columnSpan="3"
-        android:layout_gravity="center_horizontal"
-        android:textStyle="bold"
-        android:textSize="20dp"/>
-
-    <TextView
-        android:text="Моб.телефон: "
-        android:layout_column="0"
-        android:layout_row="1"
-        android:layout_marginBottom="10dp"
-        android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/phone"
-        android:text=" +380 95 395 33 62"
-        android:layout_column="1"
-        android:layout_row="1"
-        android:textSize="15dp"/>
-
-    <ImageButton
-        android:id="@+id/copy_phone"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_column="2"
-        android:layout_gravity="end"
-        android:layout_row="1"
-        android:background="#FBFBFB"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_copy"
-        />
-
-    <TextView
-        android:text="Эл. почта: "
-        android:layout_column="0"
-        android:layout_row="2"
-        android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/email"
-        android:text=" sburchinskaya.2000@gmail.com"
-        android:layout_column="1"
-        android:layout_row="2"
-        android:textSize="15dp"/>
-
-    <ImageButton
-        android:id="@+id/copy_email"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_column="2"
-        android:layout_gravity="end"
-        android:layout_row="2"
-        android:background="#FBFBFB"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_copy"
-        />
-
-    <TextView
-        android:text="Соц. сети: "
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_column="0"
-        android:layout_row="3"
-        android:textSize="15dp"
-        android:textStyle="bold"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_columnSpan="3"
-        android:layout_row="4"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="contactsViewModel"
+            type="com.example.telegacom.ContactsViewModel"/>
+    </data>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        >
-        <ImageButton
-            android:id="@+id/facebook_link"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:layout_column="1"
-            android:layout_row="4"
-            android:background="#FBFBFB"
-            android:scaleType="fitXY"
-            android:src="@drawable/facebook"
+        android:rowCount="7"
+        android:columnCount="3"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textSize="20sp"
+            android:layout_row="0"
+            android:layout_columnSpan="3"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/fragment_time"
             />
 
+        <TextView
+            android:text="Наши контакты"
+            android:layout_marginBottom="20dp"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_columnSpan="3"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:text="Моб.телефон: "
+            android:layout_column="0"
+            android:layout_row="2"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/phone"
+            android:text="@{contactsViewModel.phone}"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:textSize="15dp"/>
+
         <ImageButton
-            android:id="@+id/vk_link"
-            android:layout_width="60dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="60dp"
+            android:id="@+id/copy_phone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_column="2"
+            android:layout_gravity="end"
+            android:layout_row="2"
+            android:background="#FBFBFB"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_copy"
+            android:onClick="@{() -> contactsViewModel.CopyPhone()}"
+            />
+
+        <TextView
+            android:text="Эл. почта: "
+            android:layout_column="0"
+            android:layout_row="3"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/email"
+            android:text="@{contactsViewModel.email}"
+            android:layout_column="1"
+            android:layout_row="3"
+            android:textSize="15dp"/>
+
+        <ImageButton
+            android:id="@+id/copy_email"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_column="2"
+            android:layout_gravity="end"
+            android:layout_row="3"
+            android:background="#FBFBFB"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_copy"
+            android:onClick="@{() -> contactsViewModel.CopyEmail()}"
+            />
+
+        <TextView
+            android:text="Соц. сети: "
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_column="0"
             android:layout_row="4"
-            android:layout_marginVertical="10dp"
-            android:background="#FBFBFB"
-            android:scaleType="fitXY"
-            android:src="@drawable/vk"
-            />
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:layout_row="5"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            >
+            <ImageButton
+                android:id="@+id/facebook_link"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:layout_column="1"
+                android:layout_row="5"
+                android:background="#FBFBFB"
+                android:scaleType="fitXY"
+                android:src="@drawable/facebook"
+                />
+
+            <ImageButton
+                android:id="@+id/vk_link"
+                android:layout_width="60dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_height="60dp"
+                android:layout_column="0"
+                android:layout_row="5"
+                android:layout_marginVertical="10dp"
+                android:background="#FBFBFB"
+                android:scaleType="fitXY"
+                android:src="@drawable/vk"
+                />
 
 
-        <ImageButton
-            android:id="@+id/instagram_link"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:layout_column="2"
-            android:layout_row="4"
-            android:background="#FBFBFB"
-            android:scaleType="fitXY"
-            android:src="@drawable/instagram"
-            />
+            <ImageButton
+                android:id="@+id/instagram_link"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:layout_column="2"
+                android:layout_row="5"
+                android:background="#FBFBFB"
+                android:scaleType="fitXY"
+                android:src="@drawable/instagram"
+                />
 
-    </LinearLayout>
-
-</GridLayout>
+        </LinearLayout>
+    </GridLayout>
+</layout>

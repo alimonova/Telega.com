@@ -3,8 +3,6 @@ package com.example.telegacom.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.CheckBox
@@ -12,7 +10,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.telegacom.Fragment.CustomDialogFragment
-import com.example.telegacom.Activity.MainActivity
 import com.example.telegacom.R
 
 

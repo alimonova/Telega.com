@@ -1,39 +1,52 @@
 package com.example.telegacom.Fragment
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
-import android.content.Context.CLIPBOARD_SERVICE
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageButton
 import android.widget.TextView
-import androidx.core.app.ShareCompat
-import androidx.core.content.ContextCompat.getSystemService
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.example.telegacom.Activity.MainActivity
 import com.example.telegacom.R
+import com.example.telegacom.ViewModel.RulesViewModel
 import timber.log.Timber
-import java.util.*
 
 
 class RulesFragment : Fragment() {
+    private lateinit var viewModel : RulesViewModel
+    lateinit var fragmentTime : TextView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
+        viewModel = ViewModelProviders.of(this).get(RulesViewModel::class.java);
         Timber.i("onCreateView is called.")
         val view = LayoutInflater.from(getActivity()).inflate(
             R.layout.rules_fragment,
             container,
             false
         );
+
+        fragmentTime = view.findViewById(R.id.fragment_time) as TextView
+
+        (this.activity as MainActivity).viewModel.secondsInFocus.observe(this, Observer { newTime ->
+            var allTime = newTime;
+            var hours: Int = allTime / 3600;
+            allTime -= hours * 3600;
+            var minutes: Int = allTime / 60;
+            allTime -= minutes * 60;
+            var seconds: Int = allTime;
+            fragmentTime.text = "Вы на этой странице уже " + hours.toString() + "ч " + minutes.toString() + "м " + seconds.toString() + "с"
+        })
+
         setHasOptionsMenu(true)
         return view
     }
 
+    private fun forAMinuteOnFragment() {
+        Toast.makeText(this.activity, "Вы находились на этой странице в течение еще одной минуты.", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

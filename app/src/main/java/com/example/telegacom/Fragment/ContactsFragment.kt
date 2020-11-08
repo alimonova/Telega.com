@@ -3,29 +3,31 @@ package com.example.telegacom.Fragment
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
+import android.widget.Toast
+import com.example.telegacom.databinding.ContactsFragmentBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.example.telegacom.Activity.MainActivity
 import com.example.telegacom.R
+import com.example.telegacom.ContactsViewModel
 import timber.log.Timber
-import java.util.*
 
 
 class ContactsFragment : Fragment() {
-
+    private lateinit var viewModel : ContactsViewModel
+    lateinit var fragmentTime : TextView
     private var myClipboard: ClipboardManager? = null
     private var myClip: ClipData? = null
+    private lateinit var binding: ContactsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,12 +35,24 @@ class ContactsFragment : Fragment() {
         savedInstanceState: Bundle?
     ) : View?
     {
+        binding = ContactsFragmentBinding.inflate(inflater)
+        viewModel = ViewModelProviders.of(this).get(ContactsViewModel::class.java);
+        binding.contactsViewModel = viewModel;
+
         Timber.i("onCreateView is called.")
-        val view = LayoutInflater.from(getActivity()).inflate(
-            R.layout.contacts_fragment,
-            container,
-            false
-        );
+        val view = binding.root
+
+        fragmentTime = view.findViewById(R.id.fragment_time) as TextView
+
+        (this.activity as MainActivity).viewModel.secondsInFocus.observe(this, Observer { newTime ->
+            var allTime = newTime;
+            var hours: Int = allTime / 3600;
+            allTime -= hours * 3600;
+            var minutes: Int = allTime / 60;
+            allTime -= minutes * 60;
+            var seconds: Int = allTime;
+            fragmentTime.text = "Вы на этой странице уже " + hours.toString() + "ч " + minutes.toString() + "м " + seconds.toString() + "с"
+        })
 
         val facebook_btn : ImageButton = view.findViewById(R.id.facebook_link) as ImageButton
         val vk_btn : ImageButton = view.findViewById(R.id.vk_link) as ImageButton
@@ -86,45 +100,13 @@ class ContactsFragment : Fragment() {
         val phone : TextView = view.findViewById(R.id.phone) as TextView
         val email : TextView = view.findViewById(R.id.email) as TextView
 
-
-        copy_phone.setOnClickListener(
-            object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    val myClipboard: ClipboardManager = activity?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                    myClip = ClipData.newPlainText("text", phone.text);
-                    myClipboard?.setPrimaryClip(myClip as ClipData);
-
-                    val dialog = CustomDialogFragment()
-                    val args = Bundle()
-                    args.putString("message", "Номер телефона скопирован в буффер обмена")
-
-                    args.putString("title", "Копирование")
-                    dialog.arguments = args
-                    dialog.show(getFragmentManager() as FragmentManager, "custom")
-                }
-            }
-        )
-        
-        copy_email.setOnClickListener(
-            object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    val myClipboard: ClipboardManager = activity?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                    myClip = ClipData.newPlainText("text", email.text);
-                    myClipboard?.setPrimaryClip(myClip as ClipData);
-
-                    val dialog = CustomDialogFragment()
-                    val args = Bundle()
-                    args.putString("message", "Почта скопирована в буффер обмена")
-
-                    args.putString("title", "Копирование")
-                    dialog.arguments = args
-                    dialog.show(getFragmentManager() as FragmentManager, "custom")
-                }
-            }
-        )
-
         return view
     }
+
+    private fun forAMinuteOnFragment() {
+        Toast.makeText(this.activity, "Вы находились на этой странице в течение еще одной минуты.", Toast.LENGTH_SHORT).show()
+    }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
