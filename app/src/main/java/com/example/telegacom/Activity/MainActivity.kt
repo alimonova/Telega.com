@@ -8,6 +8,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -15,8 +16,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainer
+import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager2.adapter.FragmentViewHolder
 import com.example.telegacom.Fragment.*
 import com.example.telegacom.MainViewModel
 import com.example.telegacom.R
@@ -33,7 +38,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var linearLayout: LinearLayout
     lateinit var navigationView: NavigationView
     lateinit var viewModel : MainViewModel
+    lateinit var fragment : FragmentContainerView
     var testValue : Int = 0
+    lateinit var current_user_id : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,22 +52,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         Timber.i("onCreate called")
         val arguments : Bundle? = getIntent().extras as Bundle
-        /*if (arguments != null) {
-            if (!arguments.isEmpty) {
-                val dialog = CustomDialogFragment()
-                val args = Bundle()
-                if (arguments != null) {
-                    args.putString(
-                        "message",
-                        "Вы вошли со следующими данными:\nEmail: " + arguments.get("email")
-                            .toString() + "\nПароль: " + arguments.get("password").toString()
-                    )
-                }
-                args.putString("title", "Авторизация")
-                dialog.arguments = args
-                dialog.show(supportFragmentManager, "custom")
-            }
-        }*/
+        current_user_id = arguments!!.get("current_user_id") as String;
         toolbar = findViewById<Toolbar>(R.id.toolbar_main)
         this.toolbar.title = "Telega.com"
         setSupportActionBar(toolbar)
@@ -94,8 +86,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.getMenu().getItem(4).setChecked(true);
         backStackRemove()
         supportFragmentManager.beginTransaction().replace(
-            R.id.framelayout_main, ContactsFragment(),
-            "Контакты"
+            R.id.framelayout_main, ChannelsFragment(),
+            "Каналы"
         ).commit()
     }
 

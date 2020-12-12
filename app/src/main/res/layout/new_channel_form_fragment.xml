@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="newChannelViewModel"
+            type="com.example.telegacom.NewChannelFormViewModel"/>
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/label_channelName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Channel Name" />
+
+            <EditText
+                android:id="@+id/channel_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_channelName" />
+
+            <TextView
+                android:id="@+id/label_manager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/channel_name"
+                android:text="Manager link" />
+
+            <EditText
+                android:id="@+id/manager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_manager" />
+
+            <TextView
+                android:id="@+id/label_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/manager"
+                android:text="Description" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_description" />
+
+            <TextView
+                android:id="@+id/label_amountSubscribers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description"
+                android:text="Amount of subscribers" />
+
+            <EditText
+                android:id="@+id/amountSubscribers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_amountSubscribers"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/label_channelLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/amountSubscribers"
+                android:text="Channel Link" />
+
+            <EditText
+                android:id="@+id/channelLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_channelLink" />
+
+            <TextView
+                android:id="@+id/label_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/channelLink"
+                android:text="Price" />
+
+            <EditText
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_price"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/label_currency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price"
+                android:text="Currency" />
+
+            <RadioGroup
+                android:id="@+id/radio_currency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_currency"
+                android:layout_marginTop="15sp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_dollar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="$" />
+
+                <RadioButton
+                    android:id="@+id/rb_rub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="руб" />
+
+                <RadioButton
+                    android:id="@+id/rb_uah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="грн" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_below="@id/radio_currency">
+            <Button
+                android:id="@+id/cancel_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/mybutton"
+                android:text="Отмена"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/mybutton"
+                android:text="Сохранить"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="20sp"
+                android:textStyle="bold"/>
+                <!--android:enabled="@{newChannelViewModel.saveButtonVisible}"-->
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</layout>

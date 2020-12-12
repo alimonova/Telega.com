@@ -3,14 +3,25 @@ package com.example.telegacom.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.telegacom.LoginViewModel
 import com.example.telegacom.R
+import com.example.telegacom.RegisterViewModel
+import com.example.telegacom.ViewModelFactory.LoginViewModelFactory
+import com.example.telegacom.ViewModelFactory.RegisterViewModelFactory
+import com.example.telegacom.database.TelegaDataBase
+import com.example.telegacom.database.User
 
 
 class RegisterActivity : AppCompatActivity() {
+    var current_user : User? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -21,16 +32,51 @@ class RegisterActivity : AppCompatActivity() {
         val emailEditText = findViewById(R.id.email) as EditText
         val passwordEditText = findViewById(R.id.password) as EditText
 
+        val application = this.application
+        val dataSource = TelegaDataBase.getInstance(application).UserDao
+        val viewModelFactory = RegisterViewModelFactory(dataSource, application)
+
+        val registerViewModel =
+            ViewModelProvider(
+                this, viewModelFactory
+            ).get(RegisterViewModel::class.java)
+
+        registerViewModel.current_user.observe(this, Observer<User> {
+            current_user = registerViewModel.current_user.value
+        })
+
+        registerViewModel.was_checked.observe(this, Observer<Boolean> {
+            if (registerViewModel.was_checked.value == true) {
+                if (current_user != null) {
+                    Toast.makeText(
+                        this,
+                        "Вы успешно прошли регистрацию.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                }
+                else {
+                    Toast.makeText(
+                        this,
+                        "Что-то пошло не так.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
+
+
         register_button.setOnClickListener(
             object : View.OnClickListener {
                 override fun onClick(v: View) {
                     val email = emailEditText.text.toString()
                     val password = passwordEditText.text.toString()
 
-                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                    intent.putExtra("email", email);
-                    intent.putExtra("password", password);
-                    startActivity(intent)
+                    registerViewModel.register(email, password)
+                    if (current_user != null) {
+                        Log.i("auth", current_user!!.Email.toString())
+                    }
                 }
             })
 

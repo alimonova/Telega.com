@@ -30,7 +30,6 @@
             android:layout_toRightOf="@+id/imageView_appLogo">
 
             <TextView
-                android:id="@+id/textView_name_nav"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -41,7 +40,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView_subName_nav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"

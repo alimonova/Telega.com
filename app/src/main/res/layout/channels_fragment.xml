@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="15dp"
-        android:textSize="26sp"
-        android:text='Тут скоро будет страница каналов!\n\nДля просмотра готовой страницы перейдите во вкладку "Контакты", используя наше классное боковое меню!'/>
+    <data>
+        <variable
+            name="channelViewModel"
+            type="com.example.telegacom.ChannelViewModel" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10sp"
+        android:padding="10sp">
+
+        <Button
+            android:id="@+id/create_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/mybutton"
+            android:text="Добавить канал"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/create_btn"
+            android:layout_marginTop="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{channelViewModel.channelsString}" />
+
+        </ScrollView>
+
+    </RelativeLayout>
+</layout>
