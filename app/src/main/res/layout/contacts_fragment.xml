@@ -4,7 +4,7 @@
     <data>
         <variable
             name="contactsViewModel"
-            type="com.example.telegacom.ContactsViewModel"/>
+            type="com.example.tg.telegacom.ViewModel.ContactsViewModel"/>
     </data>
     <GridLayout
         android:layout_width="match_parent"

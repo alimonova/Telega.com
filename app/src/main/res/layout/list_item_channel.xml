@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="channel"
+            type="com.example.tg.telegacom.database.Channel" />
+
+        <variable
+            name="clickListener"
+            type="com.example.tg.telegacom.ChannelListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:orientation="vertical"
+        android:onClick="@{() -> clickListener.onClick(channel)}">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="80dp"
+            android:layout_height="0sp"
+            android:layout_marginLeft="16dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/send_request"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:sleepImage="@{channel}"
+            android:src="@drawable/instagram" />
+
+        <TextView
+            android:id="@+id/channel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            app:channelName="@{channel}"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toTopOf="@+id/go_to_channel"
+            tools:text="Channel 1" />
+
+        <TextView
+            android:id="@+id/amount_subscribers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            app:amountSubscribers="@{channel}"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toBottomOf="@+id/channel_name"
+            tools:text="150000" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            app:channelPrice="@{channel}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/avatar"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toBottomOf="@+id/amount_subscribers"
+            android:textStyle="italic"
+            tools:text="15000 RUB" />
+
+        <Button
+            android:id="@+id/go_to_channel"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> clickListener.onClick(channel)}"
+            android:text="To channel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/send_request"
+            android:layout_width="140sp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> clickListener.onClick(channel)}"
+            android:text="Send request"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/go_to_channel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
