@@ -2,6 +2,7 @@ package com.example.telegacom.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -20,7 +21,7 @@ private val retrofit = Retrofit.Builder()
 
 interface TestApiService {
     @GET("api_v1b/get-channels")
-    suspend fun getProperties(): List<ChannelProperty>
+    suspend fun getProperties(): List<NetworkChannelContainer>
 }
 
 object TestApi {

@@ -35,7 +35,7 @@ class ChannelsFragment : Fragment() {
 
         val dataSource = TelegaDataBase.getInstance(application).ChannelDao
 
-        val viewModelFactory = ChannelViewModelFactory(dataSource, application)
+        val viewModelFactory = ChannelViewModelFactory(application)
 
         val channelViewModel =
             ViewModelProvider(

@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.example.telegacom.database.User
 
 @Entity(tableName = "Channels",
     foreignKeys = [ForeignKey(entity = User::class,

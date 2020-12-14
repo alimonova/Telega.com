@@ -5,37 +5,25 @@ import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
-import android.util.Log
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.*
 import com.example.telegacom.database.Channel
 import com.example.telegacom.database.ChannelDao
-import com.example.telegacom.database.User
-import com.example.telegacom.database.UserDao
 import com.example.telegacom.network.ChannelProperty
 import com.example.telegacom.network.TestApi
 //import kotlinx.coroutines.CoroutineScope
 //import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Job
+import com.example.telegacom.database.getDatabase
+import com.example.telegacom.repository.ChannelsRepository
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ChannelViewModel(
-    val channels: ChannelDao,
     application: Application
 ) : AndroidViewModel(application) {
 
-    private val _status = MutableLiveData<String>()
-
-    val status: LiveData<String>
-        get() = _status
-
-    //private var viewModelJob = Job()
-    //private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
-    //private var tonight = MutableLiveData<SleepNight?>()
+    private val database = getDatabase(application)
+    private val channelsRepository = ChannelsRepository(database)
 
     private val _properties = MutableLiveData<List<ChannelProperty>>()
 
@@ -43,44 +31,23 @@ class ChannelViewModel(
     val properties: LiveData<List<ChannelProperty>>
         get() = _properties
 
-    val channels_list = channels.getAllChannels()
+    //val channels_list = channels.getAllChannels()
 
-    public val channelsString = Transformations.map(channels_list) { channels_list ->
-        formatChannels(channels_list, application.resources)
-    }
+    //public val channelsString = Transformations.map(channels_list) { channels_list ->
+    //    formatChannels(channels_list, application.resources)
+    //}
+
     init {
-        getChannelProperties()
-    }
-    
-    private fun getChannelProperties() {
         viewModelScope.launch {
-            try {
-                _properties.value = TestApi.retrofitService.getProperties()
-            } catch (e: Exception) {
-                _properties.value = ArrayList()
-            }
+            channelsRepository.refreshChannels()
         }
     }
-    
-    private fun initializeChannels() {
-        viewModelScope.launch {}
-    }
 
-    private suspend fun clear() {
-        channels.clear()
-    }
-
-    private suspend fun update(channel: Channel) {
-        channels.Update(channel)
-    }
-
-    private suspend fun insert(channel: Channel) {
-        channels.insert(channel)
-    }
-
-    fun onChannelClicked (Id: Int) {
+    fun onChannelClicked(Id: Int) {
 
     }
+
+    val channels_list = channelsRepository.channels
 
     fun formatChannels(channels: List<Channel>, resources: Resources): Spanned {
         val sb = StringBuilder()

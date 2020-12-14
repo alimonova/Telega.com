@@ -7,13 +7,12 @@ import com.example.telegacom.ChannelViewModel
 import com.example.telegacom.database.ChannelDao
 
 class ChannelViewModelFactory(
-    private val dataSource: ChannelDao,
     private val application: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ChannelViewModel::class.java)) {
-            return ChannelViewModel(dataSource, application) as T
+            return ChannelViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

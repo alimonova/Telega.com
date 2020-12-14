@@ -5,13 +5,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.example.telegacom.database.Channel
 import com.example.telegacom.database.ChannelDao
-import com.example.telegacom.database.User
-import com.example.telegacom.database.UserDao
 import kotlinx.coroutines.*
-import java.text.DecimalFormat
 import kotlin.coroutines.CoroutineContext
 
 class NewChannelFormViewModel(

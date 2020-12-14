@@ -1,18 +1,12 @@
 package com.example.telegacom
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.telegacom.database.Channel
 import com.example.telegacom.databinding.ListItemChannelBinding
 import com.example.telegacom.network.ChannelProperty
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ChannelAdapter( val onClickListener: OnClickListener ) :
     ListAdapter<ChannelProperty, ChannelAdapter.ChannelPropertyViewHolder>(DiffCallback) {
