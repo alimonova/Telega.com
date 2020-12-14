@@ -20,7 +20,7 @@ private val retrofit = Retrofit.Builder()
 
 interface TestApiService {
     @GET("api_v1b/channels")
-    fun getProperties(): Call<List<ChannelProperty>>
+    suspend fun getProperties(): List<ChannelProperty>
 }
 
 object TestApi {

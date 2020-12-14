@@ -14,8 +14,9 @@ import com.example.telegacom.database.User
 import com.example.telegacom.database.UserDao
 import com.example.telegacom.network.ChannelProperty
 import com.example.telegacom.network.TestApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+//import kotlinx.coroutines.CoroutineScope
+//import kotlinx.coroutines.Dispatchers
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -33,7 +34,7 @@ class ChannelViewModel(
         get() = _response
 
     private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
+    //private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
     //private var tonight = MutableLiveData<SleepNight?>()
 
     val channels_list = channels.getAllChannels()
@@ -68,17 +69,14 @@ class ChannelViewModel(
     }
 
     private fun getChannelProperties() {
-        TestApi.retrofitService.getProperties().enqueue(object: Callback<List<ChannelProperty>> {
-            override fun onFailure(call: Call<List<ChannelProperty>>, t: Throwable) {
-                _response.value = "Failure: " + t.message
-                Log.i("api", "\"Failure: \" + t.message")
+        viewModelScope.launch {
+            try {
+                var listResult = TestApi.retrofitService.getProperties()
+                _response.value = "Success: ${listResult.size} Mars properties retrieved"
+            } catch (e: Exception) {
+                _response.value = "Failure: ${e.message}"
             }
-
-            override fun onResponse(call: Call<List<ChannelProperty>>, response: Response<List<ChannelProperty>>) {
-                _response.value = "Success: ${response.body()?.size} Channel properties retrieved"
-                Log.i("api", "Success: ${response.body()?.size} Channel properties retrieved")
-            }
-        })
+        }
     }
 
     fun formatChannels(channels: List<Channel>, resources: Resources): Spanned {
