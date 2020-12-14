@@ -5,22 +5,32 @@ import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.util.Log
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.*
 import com.example.telegacom.database.Channel
 import com.example.telegacom.database.ChannelDao
 import com.example.telegacom.database.User
 import com.example.telegacom.database.UserDao
+import com.example.telegacom.network.ChannelProperty
+import com.example.telegacom.network.TestApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ChannelViewModel(
     val channels: ChannelDao,
     application: Application
 ) : AndroidViewModel(application) {
 
+    private val _response = MutableLiveData<String>()
+
+    val response: LiveData<String>
+        get() = _response
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
@@ -33,7 +43,8 @@ class ChannelViewModel(
     }
 
     init {
-        initializeChannels()
+        //initializeChannels()
+        getChannelProperties()
     }
 
     private fun initializeChannels() {
@@ -54,6 +65,20 @@ class ChannelViewModel(
 
     fun onChannelClicked (Id: Long) {
 
+    }
+
+    private fun getChannelProperties() {
+        TestApi.retrofitService.getProperties().enqueue(object: Callback<List<ChannelProperty>> {
+            override fun onFailure(call: Call<List<ChannelProperty>>, t: Throwable) {
+                _response.value = "Failure: " + t.message
+                Log.i("api", "\"Failure: \" + t.message")
+            }
+
+            override fun onResponse(call: Call<List<ChannelProperty>>, response: Response<List<ChannelProperty>>) {
+                _response.value = "Success: ${response.body()?.size} Channel properties retrieved"
+                Log.i("api", "Success: ${response.body()?.size} Channel properties retrieved")
+            }
+        })
     }
 
     fun formatChannels(channels: List<Channel>, resources: Resources): Spanned {

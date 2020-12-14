@@ -3,6 +3,7 @@
     package="com.example.telegacom">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".TelegaApplication"
         android:allowBackup="true"
