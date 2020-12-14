@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="50dp">
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingBottom="@dimen/spacing_large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="@dimen/spacing_large"
             android:text="Telega.com"
             android:textColor="#2B1A67"
             android:textSize="35sp"
@@ -33,18 +33,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="@dimen/spacing_large"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 android:contentDescription="@string/app_name"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="@dimen/spacing_normal"
+                android:paddingBottom="@dimen/spacing_normal"
                 android:src="@drawable/ic_person"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="@dimen/spacing_normal" />
 
 
             <EditText
@@ -52,10 +52,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:layout_marginRight="@dimen/spacing_normal"
                 android:background="#00000000"
-                android:hint="Email"
+                android:hint="Электронная почта"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColor="#000000"
@@ -88,26 +88,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 android:contentDescription="@string/app_name"
-                android:paddingTop="8dp"
-                android:paddingBottom="12dp"
+                android:paddingTop="@dimen/spacing_normal"
+                android:paddingBottom="@dimen/spacing_normal"
                 android:src="@drawable/ic_baseline_lock_24"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="@dimen/spacing_normal" />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:layout_marginRight="@dimen/spacing_normal"
                 android:background="#00000000"
                 android:hint="Пароль"
                 android:inputType="textPassword"
@@ -143,7 +143,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:orientation="horizontal">
 
             <CheckBox
@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/spacing_normal"
                 android:text="Запомнить меня"
                 android:textColor="#000000"/>
 
@@ -164,7 +164,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:weightSum="2">
 
             <Button
@@ -182,7 +182,7 @@
                 android:id="@+id/button_register_activity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/spacing_normal"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
                 android:text="Регистрация"

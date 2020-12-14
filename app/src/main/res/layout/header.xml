@@ -5,4 +5,4 @@
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:text="Каналы"
-    android:padding="8dp" />
+    android:padding="@dimen/spacing_normal" />

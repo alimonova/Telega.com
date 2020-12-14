@@ -19,12 +19,12 @@
 
         <ImageView
             android:id="@+id/avatar"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_height="0sp"
             android:layout_width="60sp"
-            android:paddingRight="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:paddingRight="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
             app:layout_constraintBottom_toBottomOf="@+id/price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

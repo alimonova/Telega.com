@@ -8,23 +8,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="@dimen/spacing_normal">
 
         <ImageView
             android:id="@+id/imageView_appLogo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/spacing_normal"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_store"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="@dimen/spacing_normal" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
             android:layout_toEndOf="@+id/imageView_appLogo"
             android:orientation="vertical"
             android:layout_toRightOf="@+id/imageView_appLogo">
