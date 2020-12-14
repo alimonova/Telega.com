@@ -12,10 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.telegacom.LoginViewModel
 import com.example.telegacom.R
-import com.example.telegacom.RegisterViewModel
-import com.example.telegacom.ViewModelFactory.LoginViewModelFactory
+import com.example.telegacom.ViewModel.RegisterViewModel
 import com.example.telegacom.ViewModelFactory.RegisterViewModelFactory
 import com.example.telegacom.database.TelegaDataBase
 import com.example.telegacom.database.User

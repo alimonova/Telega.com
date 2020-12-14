@@ -3,9 +3,7 @@ package com.example.telegacom.ViewModelFactory
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.telegacom.ChannelViewModel
 import com.example.telegacom.LoginViewModel
-import com.example.telegacom.database.ChannelDao
 import com.example.telegacom.database.UserDao
 
 class LoginViewModelFactory(

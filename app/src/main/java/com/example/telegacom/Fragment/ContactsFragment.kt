@@ -17,8 +17,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.telegacom.Activity.MainActivity
-import com.example.telegacom.R
 import com.example.telegacom.ContactsViewModel
+import com.example.telegacom.R
 import timber.log.Timber
 
 

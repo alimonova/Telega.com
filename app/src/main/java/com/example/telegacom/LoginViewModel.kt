@@ -3,7 +3,6 @@ package com.example.telegacom
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.telegacom.database.Channel
 import com.example.telegacom.database.User
 import com.example.telegacom.database.UserDao
 import kotlinx.coroutines.*

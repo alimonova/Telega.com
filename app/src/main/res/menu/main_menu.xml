@@ -3,21 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/home"
-            android:icon="@drawable/ic_home"
-            android:title="Главная" />
-        <item
-            android:id="@+id/profile"
-            android:icon="@drawable/ic_person"
-            android:title="Профиль" />
-        <item
             android:id="@+id/channels"
             android:icon="@drawable/ic_line"
             android:title="Каналы" />
-        <item
-            android:id="@+id/settings"
-            android:icon="@drawable/ic_settings"
-            android:title="Настройки" />
         <item
             android:id="@+id/contacts"
             android:icon="@drawable/ic_bcontacts"

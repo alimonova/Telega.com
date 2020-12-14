@@ -12,20 +12,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.telegacom.ChannelViewModel
 import com.example.telegacom.Fragment.CustomDialogFragment
 import com.example.telegacom.LoginViewModel
 import com.example.telegacom.R
-import com.example.telegacom.ViewModelFactory.ChannelViewModelFactory
 import com.example.telegacom.ViewModelFactory.LoginViewModelFactory
 import com.example.telegacom.database.TelegaDataBase
 import com.example.telegacom.database.User
 import com.example.telegacom.database.UserDao
 import com.example.telegacom.databinding.ActivityLoginBinding
-import com.google.android.material.snackbar.Snackbar
 
 
 class LoginActivity : AppCompatActivity() {

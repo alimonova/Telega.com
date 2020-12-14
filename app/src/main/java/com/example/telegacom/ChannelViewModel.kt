@@ -5,23 +5,16 @@ import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
-import android.util.Log
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.*
 import com.example.telegacom.database.Channel
 import com.example.telegacom.database.ChannelDao
-import com.example.telegacom.database.User
-import com.example.telegacom.database.UserDao
 import com.example.telegacom.network.ChannelProperty
 import com.example.telegacom.network.TestApi
 //import kotlinx.coroutines.CoroutineScope
 //import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ChannelViewModel(
     val channels: ChannelDao,

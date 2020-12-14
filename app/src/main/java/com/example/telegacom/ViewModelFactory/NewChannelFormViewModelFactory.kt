@@ -3,10 +3,8 @@ package com.example.telegacom.ViewModelFactory
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.telegacom.LoginViewModel
 import com.example.telegacom.NewChannelFormViewModel
 import com.example.telegacom.database.ChannelDao
-import com.example.telegacom.database.UserDao
 
 class NewChannelFormViewModelFactory(
     private val dataSource: ChannelDao,

@@ -8,7 +8,6 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -17,12 +16,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainer
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.viewpager2.adapter.FragmentViewHolder
 import com.example.telegacom.Fragment.*
 import com.example.telegacom.MainViewModel
 import com.example.telegacom.R
@@ -121,32 +117,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer.closeDrawers()
         val id = item.itemId
 
-        if (id == R.id.home) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, HomeFragment(),
-                "Главная"
-            ).commit()
-            return true
-        } else if (id == R.id.profile) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, ProfileFragment(),
-                "Профиль"
-            ).commit()
-            return true
-        } else if (id == R.id.channels) {
+       if (id == R.id.channels) {
             backStackRemove()
             supportFragmentManager.beginTransaction().replace(
                 R.id.framelayout_main, ChannelsFragment(),
                 "Каналы"
-            ).commit()
-            return true
-        } else if (id == R.id.settings) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, SettingsFragment(),
-                "Настройки"
             ).commit()
             return true
         } else if (id == R.id.contacts) {

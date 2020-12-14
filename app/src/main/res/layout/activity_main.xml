@@ -55,5 +55,6 @@
             app:headerLayout="@layout/main_menu_header"
             app:menu="@menu/main_menu" />
 
+
     </androidx.drawerlayout.widget.DrawerLayout>
 </merge>
