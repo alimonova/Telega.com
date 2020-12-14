@@ -26,7 +26,7 @@ class ChannelViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
     //private var tonight = MutableLiveData<SleepNight?>()
 
-    private val channels_list = channels.getAllChannels()
+    val channels_list = channels.getAllChannels()
 
     public val channelsString = Transformations.map(channels_list) { channels_list ->
         formatChannels(channels_list, application.resources)
@@ -50,6 +50,10 @@ class ChannelViewModel(
 
     private suspend fun insert(channel: Channel) {
         channels.insert(channel)
+    }
+
+    fun onChannelClicked (Id: Long) {
+
     }
 
     fun formatChannels(channels: List<Channel>, resources: Resources): Spanned {
