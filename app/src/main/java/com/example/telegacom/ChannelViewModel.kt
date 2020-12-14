@@ -28,26 +28,40 @@ class ChannelViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private val _response = MutableLiveData<String>()
+    private val _status = MutableLiveData<String>()
 
-    val response: LiveData<String>
-        get() = _response
+    val status: LiveData<String>
+        get() = _status
 
-    private var viewModelJob = Job()
+    //private var viewModelJob = Job()
     //private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
     //private var tonight = MutableLiveData<SleepNight?>()
+
+    private val _properties = MutableLiveData<List<ChannelProperty>>()
+
+    // The external LiveData interface to the property is immutable, so only this class can modify
+    val properties: LiveData<List<ChannelProperty>>
+        get() = _properties
 
     val channels_list = channels.getAllChannels()
 
     public val channelsString = Transformations.map(channels_list) { channels_list ->
         formatChannels(channels_list, application.resources)
     }
-
     init {
-        //initializeChannels()
         getChannelProperties()
     }
-
+    
+    private fun getChannelProperties() {
+        viewModelScope.launch {
+            try {
+                _properties.value = TestApi.retrofitService.getProperties()
+            } catch (e: Exception) {
+                _properties.value = ArrayList()
+            }
+        }
+    }
+    
     private fun initializeChannels() {
         viewModelScope.launch {}
     }
@@ -64,19 +78,8 @@ class ChannelViewModel(
         channels.insert(channel)
     }
 
-    fun onChannelClicked (Id: Long) {
+    fun onChannelClicked (Id: Int) {
 
-    }
-
-    private fun getChannelProperties() {
-        viewModelScope.launch {
-            try {
-                var listResult = TestApi.retrofitService.getProperties()
-                _response.value = "Success: ${listResult.size} Mars properties retrieved"
-            } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
-            }
-        }
     }
 
     fun formatChannels(channels: List<Channel>, resources: Resources): Spanned {

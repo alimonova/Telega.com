@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="channelViewModel"
+            name="viewModel"
             type="com.example.telegacom.ChannelViewModel" />
     </data>
 
@@ -31,6 +31,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/create_btn"
             android:layout_marginTop="1dp"
+            app:listData="@{viewModel.properties}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

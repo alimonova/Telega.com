@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.telegacom.ChannelAdapter
-import com.example.telegacom.ChannelListener
 import com.example.telegacom.ChannelViewModel
 import com.example.telegacom.R
 import com.example.telegacom.ViewModelFactory.ChannelViewModelFactory
@@ -43,7 +42,7 @@ class ChannelsFragment : Fragment() {
                 this, viewModelFactory
             ).get(ChannelViewModel::class.java)
 
-        binding.channelViewModel = channelViewModel
+        binding.viewModel = channelViewModel
 
         // binding.setLifecycleOwner(this)
         binding.lifecycleOwner = this
@@ -62,15 +61,15 @@ class ChannelsFragment : Fragment() {
         val manager = LinearLayoutManager(activity)
         binding.channelsList.layoutManager = manager
 
-        val adapter = ChannelAdapter(ChannelListener { channelId ->
-            channelViewModel.onChannelClicked(channelId)
+        val adapter = ChannelAdapter(ChannelAdapter.OnClickListener { channel ->
+            channelViewModel.onChannelClicked(channel.id)
         })
 
         binding.channelsList.adapter = adapter
 
-        channelViewModel.channels_list.observe(viewLifecycleOwner, Observer {
+        channelViewModel.properties.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.addHeaderAndSubmitList(it)
+                adapter.submitList(it)
             }
         })
 
