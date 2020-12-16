@@ -1,5 +1,7 @@
-package com.example.telegacom.ViewModel
+package com.example.telegacom
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.LiveData

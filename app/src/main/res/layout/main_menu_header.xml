@@ -15,7 +15,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/logo_description"
             android:src="@drawable/ic_store"
             android:layout_marginLeft="@dimen/spacing_normal" />
 

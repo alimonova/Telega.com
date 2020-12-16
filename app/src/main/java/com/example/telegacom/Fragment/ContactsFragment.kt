@@ -44,7 +44,7 @@ class ContactsFragment : Fragment() {
 
         fragmentTime = view.findViewById(R.id.fragment_time) as TextView
 
-        (this.activity as MainActivity).viewModel.secondsInFocus.observe(this, Observer { newTime ->
+        (this.activity as MainActivity).viewModel.secondsInFocus.observe(viewLifecycleOwner, Observer { newTime ->
             var allTime = newTime;
             var hours: Int = allTime / 3600;
             allTime -= hours * 3600;
@@ -58,48 +58,29 @@ class ContactsFragment : Fragment() {
         val vk_btn : ImageButton = view.findViewById(R.id.vk_link) as ImageButton
         val instagram_btn : ImageButton = view.findViewById(R.id.instagram_link) as ImageButton
 
-        facebook_btn.setOnClickListener(
-            object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    val intent = Intent()
-                    intent.action = Intent.ACTION_VIEW
-                    intent.addCategory(Intent.CATEGORY_BROWSABLE)
-                    intent.data = Uri.parse("https://www.facebook.com/alex.burchinskaya00/")
-                    startActivity(intent)
-                }
-            }
-        )
+        facebook_btn.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.addCategory(Intent.CATEGORY_BROWSABLE)
+            intent.data = Uri.parse("https://www.facebook.com/alex.burchinskaya00/")
+            startActivity(intent)
+        }
 
-        vk_btn.setOnClickListener(
-            object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    val intent = Intent()
-                    intent.action = Intent.ACTION_VIEW
-                    intent.addCategory(Intent.CATEGORY_BROWSABLE)
-                    intent.data = Uri.parse("https://vk.com/mardbm")
-                    startActivity(intent)
-                }
-            }
-        )
+        vk_btn.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.addCategory(Intent.CATEGORY_BROWSABLE)
+            intent.data = Uri.parse("https://vk.com/mardbm")
+            startActivity(intent)
+        }
 
-        instagram_btn.setOnClickListener(
-            object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    val intent = Intent()
-                    intent.action = Intent.ACTION_VIEW
-                    intent.addCategory(Intent.CATEGORY_BROWSABLE)
-                    intent.data = Uri.parse("https://www.instagram.com/mardbm_/")
-                    startActivity(intent)
-                }
-            }
-        )
-
-        val copy_phone : ImageButton = view.findViewById(R.id.copy_phone) as ImageButton
-        val copy_email : ImageButton = view.findViewById(R.id.copy_email) as ImageButton
-
-        val phone : TextView = view.findViewById(R.id.phone) as TextView
-        val email : TextView = view.findViewById(R.id.email) as TextView
-
+        instagram_btn.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.addCategory(Intent.CATEGORY_BROWSABLE)
+            intent.data = Uri.parse("https://www.instagram.com/mardbm_/")
+            startActivity(intent)
+        }
         return view
     }
 

@@ -6,8 +6,7 @@
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:openDrawer="start">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -54,7 +53,5 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/main_menu_header"
             app:menu="@menu/main_menu" />
-
-
     </androidx.drawerlayout.widget.DrawerLayout>
 </merge>

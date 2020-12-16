@@ -2,25 +2,32 @@ package com.example.telegacom.Fragment
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ShareCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.telegacom.AboutViewModel
 import com.example.telegacom.Activity.MainActivity
 import com.example.telegacom.R
-import com.example.telegacom.ViewModel.AboutViewModel
+import com.example.telegacom.databinding.AboutFragmentBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import timber.log.Timber
 
 
 class AboutFragment : Fragment() {
     private lateinit var viewModel : AboutViewModel
     lateinit var fragmentTime : TextView
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?
         {
             viewModel = ViewModelProviders.of(this).get(AboutViewModel::class.java);
             Timber.i("onCreateView is called.")
@@ -30,27 +37,35 @@ class AboutFragment : Fragment() {
                 false
             );
 
-            fragmentTime = view.findViewById(R.id.fragment_time) as TextView
+            val binding: AboutFragmentBinding = DataBindingUtil.inflate(
+                inflater, R.layout.about_fragment, container, false
+            )
 
-            (this.activity as MainActivity).viewModel.secondsInFocus.observe(this, Observer { newTime ->
-                var allTime = newTime;
-                var hours: Int = allTime / 3600;
-                allTime -= hours * 3600;
-                var minutes: Int = allTime / 60;
-                allTime -= minutes * 60;
-                var seconds: Int = allTime;
-                fragmentTime.text = "Вы на этой странице уже " + hours.toString() + "ч " + minutes.toString() + "м " + seconds.toString() + "с"
-            })
+            (this.activity as MainActivity).viewModel.secondsInFocus.observe(
+                viewLifecycleOwner,
+                Observer { newTime ->
+                    var allTime = newTime;
+                    var hours: Int = allTime / 3600;
+                    allTime -= hours * 3600;
+                    var minutes: Int = allTime / 60;
+                    allTime -= minutes * 60;
+                    var seconds: Int = allTime;
+                    //  fragmentTime.text = "Вы на этой странице уже " + hours.toString() + "ч " + minutes.toString() + "м " + seconds.toString() + "с"
+                })
             setHasOptionsMenu(true)
             return view
     }
 
     private fun forAMinuteOnFragment() {
-        Toast.makeText(this.activity, "Вы находились на этой странице в течение еще одной минуты.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            this.activity,
+            "Вы находились на этой странице в течение еще одной минуты.",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun getShareIntent() : Intent {
-        return ShareCompat.IntentBuilder.from(activity!!)
+        return ShareCompat.IntentBuilder.from(requireActivity())
             .setText("Я пользуюсь приложением Telega.com. Попробуй и ты!\n*ссылка на скачивание с PM*")
             .setType("text/plain")
             .intent
@@ -70,9 +85,13 @@ class AboutFragment : Fragment() {
         }
     }
 
+    fun onFabClicked() {
+
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.share -> shareSuccess  ()
+            R.id.share -> shareSuccess()
         }
         return super.onOptionsItemSelected(item)
     }
