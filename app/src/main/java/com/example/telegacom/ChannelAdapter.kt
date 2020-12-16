@@ -1,52 +1,53 @@
 package com.example.telegacom
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.telegacom.databinding.ListItemChannelBinding
 import com.example.telegacom.network.ChannelProperty
 
-class ChannelAdapter( val onClickListener: OnClickListener ) :
-    ListAdapter<ChannelProperty, ChannelAdapter.ChannelPropertyViewHolder>(DiffCallback) {
+class ChannelAdapter( val callback: ChannelClick) :
+    RecyclerView.Adapter<ChannelViewHolder>()  {
 
-    class ChannelPropertyViewHolder(private var binding: ListItemChannelBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(channelProperty: ChannelProperty) {
-            binding.property = channelProperty
-            // This is important, because it forces the data binding to execute immediately,
-            // which allows the RecyclerView to make the correct view size measurements
-            binding.executePendingBindings()
+    var channels: List<ChannelProperty> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {
+        val withDataBinding: ListItemChannelBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            ChannelViewHolder.LAYOUT,
+            parent,
+            false)
+        return ChannelViewHolder(withDataBinding)
+    }
+
+    override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
+        holder.viewDataBinding.also {
+            it.channelCallback = callback
+            it.property = channels[position]
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ChannelProperty>() {
-        override fun areItemsTheSame(oldItem: ChannelProperty, newItem: ChannelProperty): Boolean {
-            return oldItem === newItem
-        }
+    override fun getItemCount() = channels.size
 
-        override fun areContentsTheSame(oldItem: ChannelProperty, newItem: ChannelProperty): Boolean {
-            return oldItem.id == newItem.id
-        }
-    }
+}
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ChannelPropertyViewHolder {
-        return ChannelPropertyViewHolder(ListItemChannelBinding.inflate(LayoutInflater.from(parent.context)))
+class ChannelViewHolder(val viewDataBinding: ListItemChannelBinding) :
+    RecyclerView.ViewHolder(viewDataBinding.root) {
+    companion object {
+        @LayoutRes
+        val LAYOUT = R.layout.list_item_channel
     }
+}
 
-    override fun onBindViewHolder(holder: ChannelPropertyViewHolder, position: Int) {
-        val channelProperty = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(channelProperty)
-        }
-        holder.bind(channelProperty)
-    }
-
-    class OnClickListener(val clickListener: (channelProperty: ChannelProperty) -> Unit) {
-        fun onClick(channelProperty: ChannelProperty) = clickListener(channelProperty)
-    }
+class ChannelClick(val block: (ChannelProperty) -> Unit) {
+    fun onClick(channel: ChannelProperty) = block(channel)
 }

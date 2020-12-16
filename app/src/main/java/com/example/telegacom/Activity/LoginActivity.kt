@@ -117,12 +117,14 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
 
-        register_button.setOnClickListener(
-            object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
-                }
-            })
+        register_button.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@LoginActivity,
+                    RegisterActivity::class.java
+                )
+            )
+        }
 
         val checkRemember : CheckBox = findViewById(R.id.check_remember) as CheckBox
 

@@ -1,6 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="channelDetailsViewModel"
+            type="com.example.telegacom.ChannelDetailsViewModel"/>
+
+    </data>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/channelName"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:channelName="@{channelDetailsViewModel.channelName}"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/channelName"
+                android:layout_marginTop="10sp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_height="60sp"
+                    android:layout_width="120sp"
+                    android:paddingRight="10dp"
+                    android:layout_marginBottom="8dp"
+                    app:imageUrl="@{channelDetailsViewModel.channelImage}"/>
+
+                <TextView
+                    android:id="@+id/label_amountSubscribers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/avatar"
+                    android:text="Подписчики: "
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/amountSubscribers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/label_amountSubscribers"
+                    android:text="@{channelDetailsViewModel.channelSubscribers}"/>
+
+                <TextView
+                    android:id="@+id/label_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/avatar"
+                    android:layout_below="@id/amountSubscribers"
+                    android:text="Менеджер: "
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/label_manager"
+                    android:layout_below="@id/amountSubscribers"
+                    android:text="@{channelDetailsViewModel.managerLink}"/>
+
+                <TextView
+                    android:id="@+id/label_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/avatar"
+                    android:layout_below="@id/manager"
+                    android:text="Стоимость: "
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/label_price"
+                    android:layout_below="@id/manager"
+                    android:text="@{channelDetailsViewModel.price}"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/avatar"
+                    android:layout_marginTop="10sp"
+
+                    android:text="@{channelDetailsViewModel.channelDescription}"/>
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:weightSum="2">
+                <Button
+                    android:id="@+id/back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/mybutton"
+                    android:text="Назад"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="20sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/go_to_channel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/mybutton"
+                    android:text="Перейти на канал"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="20sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </RelativeLayout>
+</layout>

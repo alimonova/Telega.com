@@ -21,6 +21,10 @@ import androidx.fragment.app.FragmentContainer
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.viewpager2.adapter.FragmentViewHolder
 import com.example.telegacom.Fragment.*
 import com.example.telegacom.MainViewModel
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val CORRECT_BUZZ_PATTERN = longArrayOf(100, 100, 100, 100, 100, 100)
 
     lateinit var toolbar: Toolbar
+    lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var drawer: DrawerLayout
     lateinit var linearLayout: LinearLayout
     lateinit var navigationView: NavigationView
@@ -83,12 +88,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
         navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
-        navigationView.getMenu().getItem(4).setChecked(true);
-        backStackRemove()
+        navigationView.getMenu().getItem(2).setChecked(true);
+        /*backStackRemove()
         supportFragmentManager.beginTransaction().replace(
             R.id.framelayout_main, ChannelsFragment(),
             "Каналы"
-        ).commit()
+        ).commit()*/
     }
 
     private fun forAMinuteOnFragment() {
@@ -101,12 +106,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         val id = item.itemId
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onSupportNavigateUp() =
+               this.findNavController(R.id.myNavHostFragment).navigateUp()
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         viewModel.UpdateSeconds();
@@ -119,60 +126,40 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer.closeDrawers()
         val id = item.itemId
 
-        if (id == R.id.home) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, HomeFragment(),
-                "Главная"
-            ).commit()
-            return true
-        } else if (id == R.id.profile) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, ProfileFragment(),
-                "Профиль"
-            ).commit()
-            return true
-        } else if (id == R.id.channels) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, ChannelsFragment(),
-                "Каналы"
-            ).commit()
-            return true
-        } else if (id == R.id.settings) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, SettingsFragment(),
-                "Настройки"
-            ).commit()
-            return true
-        } else if (id == R.id.contacts) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, ContactsFragment(),
-                "Контакты"
-            ).commit()
-            return true
-        } else if (id == R.id.about) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, AboutFragment(),
-                "О приложении"
-            ).commit()
-            return true
-        }  else if (id == R.id.rules) {
-            backStackRemove()
-            supportFragmentManager.beginTransaction().replace(
-                R.id.framelayout_main, RulesFragment(),
-                "Правила использования"
-            ).commit()
-            return true
-        } else if (id == R.id.login) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        when (id) {
+            R.id.home -> {
+                backStackRemove()
+                this.findNavController(R.id.myNavHostFragment).navigate(R.id.homeFragment)
+            }
+            R.id.profile -> {
+                backStackRemove()
+                this.findNavController(R.id.myNavHostFragment).navigate(R.id.profileFragment)
+            }
+            R.id.channels -> {
+                backStackRemove()
+                this.findNavController(R.id.myNavHostFragment).navigate(R.id.channelsFragment)
+            }
+            R.id.settings -> {
+                backStackRemove()
+                this.findNavController(R.id.myNavHostFragment).navigate(R.id.settingsFragment)
+            }
+            R.id.contacts -> {
+                backStackRemove()
+                this.findNavController(R.id.myNavHostFragment).navigate(R.id.contactsFragment)
+            }
+            R.id.about -> {
+                backStackRemove()
+                this.findNavController(R.id.myNavHostFragment).navigate(R.id.aboutFragment)
+            }
+            R.id.rules -> {
+                backStackRemove()
+                this.findNavController(R.id.myNavHostFragment).navigate(R.id.rulesFragment)
+            }
+            R.id.login -> {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
-
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
         drawer.closeDrawer(GravityCompat.START)
         return true

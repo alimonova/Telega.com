@@ -9,13 +9,17 @@
         <variable
             name="property"
             type="com.example.telegacom.network.ChannelProperty" />
+        <variable
+            name="channelCallback"
+            type="com.example.telegacom.ChannelClick" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5sp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="@{() -> channelCallback.onClick(property)}">
 
         <ImageView
             android:id="@+id/avatar"

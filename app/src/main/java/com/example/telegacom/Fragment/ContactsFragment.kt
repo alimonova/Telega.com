@@ -94,12 +94,6 @@ class ContactsFragment : Fragment() {
             }
         )
 
-        val copy_phone : ImageButton = view.findViewById(R.id.copy_phone) as ImageButton
-        val copy_email : ImageButton = view.findViewById(R.id.copy_email) as ImageButton
-
-        val phone : TextView = view.findViewById(R.id.phone) as TextView
-        val email : TextView = view.findViewById(R.id.email) as TextView
-
         return view
     }
 

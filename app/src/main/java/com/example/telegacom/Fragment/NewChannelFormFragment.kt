@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.telegacom.Activity.MainActivity
 import com.example.telegacom.NewChannelFormViewModel
 import com.example.telegacom.R
@@ -49,12 +50,12 @@ class NewChannelFormFragment  : Fragment() {
                     Snackbar.LENGTH_SHORT // How long to display the message.
                 ).show()
 
-                newChannelViewModel.doneShowingSnackbar()
+                /*newChannelViewModel.doneShowingSnackbar()
                 requireActivity().supportFragmentManager.beginTransaction().replace(
                     R.id.framelayout_main, ChannelsFragment(),
                     "Каналы"
                 ).commit()
-
+*/
             }
         })
 
@@ -78,15 +79,9 @@ class NewChannelFormFragment  : Fragment() {
                 }
             })
 
-        binding.cancelBtn.setOnClickListener (
-            object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    requireActivity().supportFragmentManager.beginTransaction().replace(
-                        R.id.framelayout_main, ChannelsFragment(),
-                        "Каналы"
-                    ).commit()
-                }
-            })
+        binding.cancelBtn.setOnClickListener { view: View ->
+            view.findNavController().navigateUp()
+        }
 
         return binding.root
     }

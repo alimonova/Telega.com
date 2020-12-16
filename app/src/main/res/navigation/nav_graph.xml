@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/channelsFragment">
+    <fragment
+        android:id="@+id/channelsFragment"
+        android:name="com.example.telegacom.Fragment.ChannelsFragment"
+        android:label="ChannelsFragment" >
+        <action
+            android:id="@+id/action_channelsFragment_to_newChannelFormFragment"
+            app:destination="@id/newChannelFormFragment" />
+        <action
+            android:id="@+id/action_channelsFragment_to_channelDetailsFragment"
+            app:destination="@id/channelDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newChannelFormFragment"
+        android:name="com.example.telegacom.Fragment.NewChannelFormFragment"
+        android:label="NewChannelFormFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.telegacom.Fragment.AboutFragment"
+        android:label="AboutFragment" />
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.example.telegacom.Fragment.ContactsFragment"
+        android:label="ContactsFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.telegacom.Fragment.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/rulesFragment"
+        android:name="com.example.telegacom.Fragment.RulesFragment"
+        android:label="RulesFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.telegacom.Fragment.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.telegacom.Fragment.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/channelDetailsFragment"
+        android:name="com.example.telegacom.Fragment.ChannelDetailsFragment"
+        android:label="ChannelDetailsFragment" />
+</navigation>

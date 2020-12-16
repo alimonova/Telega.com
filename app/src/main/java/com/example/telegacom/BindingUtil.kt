@@ -10,11 +10,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.telegacom.database.Channel
 import com.example.telegacom.network.ChannelProperty
 
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<ChannelProperty>?) {
-    val adapter = recyclerView.adapter as ChannelAdapter
-    adapter.submitList(data)
-}
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {

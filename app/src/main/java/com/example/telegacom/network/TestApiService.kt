@@ -1,12 +1,13 @@
 package com.example.telegacom.network
 
+import android.provider.MediaStore.Video
+import com.squareup.moshi.FromJson
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+
 
 private const val BASE_URL = "https://checkiant.com/"
 
@@ -21,7 +22,7 @@ private val retrofit = Retrofit.Builder()
 
 interface TestApiService {
     @GET("api_v1b/get-channels")
-    suspend fun getProperties(): List<NetworkChannelContainer>
+    suspend fun getProperties() : NetworkChannelContainer
 }
 
 object TestApi {
