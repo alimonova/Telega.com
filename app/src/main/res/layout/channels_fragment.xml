@@ -21,7 +21,7 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="bottom"
             android:background="@drawable/mybutton"
-            android:text="Добавить канал"
+            android:text="@string/new_channel"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 

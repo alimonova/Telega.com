@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:text="Telega.com"
+            android:text="@string/app_name"
             android:textColor="#2B1A67"
             android:textSize="35sp"
             android:textStyle="bold" />
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Добро пожаловать!"
+            android:text="@string/welcome"
             android:textColor="#434343" />
 
         <LinearLayout
@@ -54,7 +54,7 @@
                 android:layout_marginLeft="@dimen/spacing_normal"
                 android:layout_marginRight="@dimen/spacing_normal"
                 android:background="#00000000"
-                android:hint="Электронная почта"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColor="#000000"
@@ -63,7 +63,7 @@
 
         </LinearLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
@@ -108,7 +108,7 @@
                 android:layout_marginLeft="@dimen/spacing_normal"
                 android:layout_marginRight="@dimen/spacing_normal"
                 android:background="#00000000"
-                android:hint="Пароль"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="#000000"
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="Зарегистрироваться"
+                android:text="@string/to_register"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 />
@@ -161,7 +161,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="Войти"
+                android:text="@string/log_in"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"/>
 

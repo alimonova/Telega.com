@@ -5,23 +5,23 @@
         <item
             android:id="@+id/channels"
             android:icon="@drawable/ic_line"
-            android:title="Каналы" />
+            android:title="@string/channels" />
         <item
             android:id="@+id/contacts"
             android:icon="@drawable/ic_bcontacts"
-            android:title="Контакты" />
+            android:title="@string/our_contacts" />
         <item
             android:id="@+id/login"
             android:icon="@drawable/ic_login"
-            android:title="Выход" />
+            android:title="@string/login" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/ic_baseline_info_24"
-            android:title="О приложении" />
+            android:title="@string/about_app" />
         <item
             android:id="@+id/rules"
             android:icon="@drawable/ic_baseline_help_24"
-            android:title="Правила использования" />
+            android:title="@string/using_rules" />
     </group>
 
 </menu>

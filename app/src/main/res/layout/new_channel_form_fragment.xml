@@ -13,7 +13,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
             android:orientation="vertical">
 
@@ -21,7 +21,7 @@
                 android:id="@+id/label_channelName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Channel Name" />
+                android:text="@string/channel_name" />
 
             <EditText
                 android:id="@+id/channel_name"
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/channel_name"
-                android:text="Manager link" />
+                android:text="@string/manager_link" />
 
             <EditText
                 android:id="@+id/manager"
@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/manager"
-                android:text="Description" />
+                android:text="@string/channel_description" />
 
             <EditText
                 android:id="@+id/description"
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/description"
-                android:text="Amount of subscribers" />
+                android:text="@string/subscribers_amount" />
 
             <EditText
                 android:id="@+id/amountSubscribers"
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/amountSubscribers"
-                android:text="Channel Link" />
+                android:text="@string/channel_link" />
 
             <EditText
                 android:id="@+id/channelLink"
@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/channelLink"
-                android:text="Price" />
+                android:text="@string/price" />
 
             <EditText
                 android:id="@+id/price"
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/price"
-                android:text="Currency" />
+                android:text="@string/currency" />
 
             <RadioGroup
                 android:id="@+id/radio_currency"
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="$" />
+                    android:text="@string/USD" />
 
                 <RadioButton
                     android:id="@+id/rb_rub"
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="руб" />
+                    android:text="@string/RUB" />
 
                 <RadioButton
                     android:id="@+id/rb_uah"
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="грн" />
+                    android:text="@string/UAH" />
             </RadioGroup>
 
             <LinearLayout
@@ -147,9 +147,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_alignParentBottom="true"
                 android:background="@drawable/mybutton"
-                android:text="Отмена"
+                android:text="@string/cancel"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:textStyle="bold" />
@@ -160,13 +159,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/spacing_normal"
-                android:layout_alignParentBottom="true"
                 android:background="@drawable/mybutton"
-                android:text="Сохранить"
+                android:text="@string/save"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:textStyle="bold"/>
-                <!--android:enabled="@{newChannelViewModel.saveButtonVisible}"-->
+
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

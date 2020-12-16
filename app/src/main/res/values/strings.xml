@@ -5,4 +5,47 @@
     <string name="profile">Профиль</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_app">О приложении</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="email">Электронная почта</string>
+    <string name="password">Пароль</string>
+    <string name="remember_me">Запомнить меня</string>
+    <string name="log_in">Войти</string>
+    <string name="registration">Регистрация</string>
+    <string name="to_register">Зарегистрироваться</string>
+    <string name="new_channel">Добавить канал</string>
+    <string name="our_contacts">Наши контакты</string>
+    <string name="mob_phone">Моб. телефон:</string>
+    <string name="email_short">Эл. почта:</string>
+    <string name="social_networks">Соц. сети:</string>
+    <string name="channels">Каналы:</string>
+    <string name="app_desc">Биржа рекламы в телеге:</string>
+    <string name="channel_name">Название канала:</string>
+    <string name="manager_link">Контакт менеджера:</string>
+    <string name="channel_description">Описание канала:</string>
+    <string name="subscribers_amount">Количество подписчиков:</string>
+    <string name="channel_link">Ссылка на канал:</string>
+    <string name="price">Стоимость рекламы:</string>
+    <string name="currency">Валюта:</string>
+    <string name="USD">USD</string>
+    <string name="RUB">RUB</string>
+    <string name="UAH">UAH</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="using_rules">Правила использования</string>
+    <string name="login">Вход</string>
+    <string name="share">Поделиться</string>
+    <string name="app_rules">
+   \nВ приложении Telega.com строго запрещено:\n\n
+- Публиковать телеграм-каналы содержащие материалы , нарушающие законодательство Украины и РФ, в частности содержащие призывы к межнациональной розни, излишки обнаженки, обилие нецензурной лексики;
+\n\n- Выдавать себя за администратора чужого телеграм-канала;
+\n\n- Удалять рекламную публикацию раньше указанного в договоренности времени;
+\n\n- Любые другие мошеннические действия.</string>
+    <string name="app_about">Telega.com - программный продукт, который используется для сотрудничества рекламодателей с владельцами телеграм-каналов.\n\nТак как в телеграмме отсутствует возможность набрать аудиторию на свой канал с помощью органического трафика, реклама является единственной возможностью раскрутить канал.\n\nРекламодатели могут выбрать площадку для размещения рекламных объявлений, учитывая их бюджет, необходимую дату публикации и категорию телеграм-канала.\n\nАдминистраторы могут добавить свой телеграм-канал в общую базу, где его смогут увидеть рекламодатели, а так же есть возможность вручную найти рекламные объявления, которые администраторы согласны опубликовать на своей площадке.
+
+    \n\nНа данный момент программа находится на стадии закрытого Альфа-тестирования (версия 0.01)
+
+    \n\nПрограммный продукт разработан Бурчинской А. в 2020 году.
+    \n\nВсе права защищены.</string>
+
 </resources>
